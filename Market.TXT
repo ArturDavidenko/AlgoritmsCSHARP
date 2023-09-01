@@ -1,0 +1,152 @@
+namespace _13_uzd
+{
+    class Market
+    {
+        string Name;
+        int NumberOfProductsPractice;
+        int NumberOfHouseholdProducts;
+
+        ProductPractice[] productPrectice = new ProductPractice[0];
+        HouseholdProducts[] householdProducts = new HouseholdProducts[0];
+
+        public void RegistrationMarket()
+        {
+            Console.WriteLine("Name of market: ");
+            Name = Console.ReadLine();
+            bool NumberOfProductsPracticeBool;
+            do
+            {
+                Console.WriteLine("Market product practice amount: ");
+                NumberOfProductsPracticeBool = int.TryParse(Console.ReadLine(), out NumberOfProductsPractice);
+                if (NumberOfProductsPracticeBool == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+            } while (NumberOfProductsPracticeBool != true);
+
+            if (NumberOfProductsPractice != 0)
+            {
+                for (int i = 0; i < NumberOfProductsPractice; i++)
+                {
+                    Array.Resize(ref productPrectice, productPrectice.Length + 1);
+                    ProductPractice productPrectices = new ProductPractice();
+                    productPrectices.RegistrationProducts();
+                    productPrectice[i] = productPrectices;
+                    Console.Clear();
+                }
+            }
+
+            bool NumberOfHouseholdProductsBool;
+            do
+            {
+                Console.WriteLine("Market household products amount: ");
+                NumberOfHouseholdProductsBool = int.TryParse(Console.ReadLine(), out NumberOfHouseholdProducts);
+                if (NumberOfHouseholdProductsBool == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+            } while (NumberOfHouseholdProductsBool != true);
+
+            if (NumberOfHouseholdProducts != 0)
+            {
+                for (int i = 0; i < NumberOfHouseholdProducts; i++)
+                {
+                    Array.Resize(ref householdProducts, householdProducts.Length + 1);
+                    HouseholdProducts householdProduct = new HouseholdProducts();
+                    householdProduct.RegistrationProducts();
+                    householdProducts[i] = householdProduct;
+                    Console.Clear();
+                }
+            }
+        }
+
+        public void PrintNameOfMarket()
+        {
+            Console.WriteLine($"{Name}");
+        }
+
+        public void GetMarketProducts()
+        {
+            if(NumberOfProductsPractice != 0)
+            {
+                for (int i = 0; i < NumberOfProductsPractice; i++)
+                {
+                    productPrectice[i].PrintProdcts(); 
+                }
+            }
+            else
+            {
+                Console.WriteLine("not found!");
+            }
+            if (NumberOfHouseholdProducts != 0)
+            {
+                for (int i = 0; i < NumberOfHouseholdProducts; i++)
+                {
+                    householdProducts[i].PrintHouseholdProducts();
+                }
+            }
+            else
+            {
+                Console.WriteLine("not found!");
+            }
+        }
+        public void TypeOfMarket()
+        {
+            if(NumberOfProductsPractice != 0 && NumberOfHouseholdProducts != 0)
+            {
+                Console.WriteLine("Have big market!");
+            }
+            else if (NumberOfProductsPractice == 0 && NumberOfHouseholdProducts == 0)
+            {
+                Console.WriteLine("Have small market!");
+            }
+            else if (NumberOfProductsPractice != 0)
+            {
+                Console.WriteLine("Practice market!");
+            }
+            else if (NumberOfHouseholdProducts != 0)
+            {
+                Console.WriteLine("Household market!");
+            }
+        }
+
+        public void GetArpus()
+        {
+            if(NumberOfProductsPractice == 0)
+            {
+                Console.WriteLine("Market is not arpus products!");
+            }
+            for (int i = 0; i < NumberOfProductsPractice; i++)
+            {
+                if (productPrectice[i].Shelflife <= DateTime.Now)
+                {
+                    Console.WriteLine($"Product with name {productPrectice[i].name} shel life is comming end!");
+                }
+            }
+        }
+
+        public void GetBistamsProdcts()
+        {
+            if (NumberOfHouseholdProducts == 0)
+            {
+                Console.WriteLine("Market is not bistams products!");
+
+            }
+            for (int i = 0; i < NumberOfHouseholdProducts; i++)
+            {
+                if (householdProducts[i].Bistama == true)
+                {
+                    Console.WriteLine($"Product with name {householdProducts[i].name} is bistama!");
+                }
+            }
+        }
+    }
+}

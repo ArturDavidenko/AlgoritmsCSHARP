@@ -1,0 +1,63 @@
+namespace _13_uzd
+{
+    class HouseholdProducts : Product
+    {
+        private string Material;
+        public bool Bistama;
+        private double SellPrise;
+
+        public void RegistrationProducts()
+        {
+            Console.Write("Product name: ");
+            name = Console.ReadLine();
+
+            bool priseBool;
+            do
+            {
+                Console.Write("Product prise is: ");
+                priseBool = double.TryParse(Console.ReadLine().Replace('.', ','), out prise);
+                if (priseBool == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+            } while (priseBool != true);
+
+            bool BistamaBool = false;
+            do
+            {
+                Console.Write("Product bistama: ");
+                string BistamaProduct = Console.ReadLine();
+                if (BistamaProduct == "yes" || BistamaProduct == "true" || BistamaProduct == "t")
+                {
+                    Bistama = true;
+                    BistamaBool = true;
+                }
+                else if (BistamaProduct == "no" || BistamaProduct == "false" || BistamaProduct == "f")
+                {
+                    Bistama = false;
+                    BistamaBool = true;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+
+            } while (BistamaBool != true);
+            Console.WriteLine("Product material: ");
+            Material = Console.ReadLine();
+        }
+
+       public void PrintHouseholdProducts()
+       {
+            PrintProduct();
+            SellPrise = 1.5 * prise;
+            Console.WriteLine($"Product material is: {Material}");
+            Console.WriteLine($"Product bistama is: {Bistama}");
+            Console.WriteLine($"Product sell prise is: {SellPrise}");
+       }
+    }
+}

@@ -1,0 +1,81 @@
+namespace _13_uzd
+{
+    class ProductPractice : Product
+    {
+        public DateTime Shelflife;
+        private bool Alergija;
+        private string Mervieniba;
+        private double SellPrice;
+
+        public void RegistrationProducts()
+        {
+            Console.WriteLine("Product name: ");
+            name = Console.ReadLine();
+            bool priseBool;
+            do
+            {
+                Console.Write("Product price: ");
+                priseBool = double.TryParse(Console.ReadLine().Replace('.', ','), out prise);
+                if (priseBool == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+
+            } while (priseBool != true);
+            bool shelfLifeBool;
+            do
+            {
+                Console.Write("Product shelf life is: ");
+                shelfLifeBool = DateTime.TryParse(Console.ReadLine(), out Shelflife);
+                if (shelfLifeBool == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+
+            } while (shelfLifeBool != false);
+
+            bool alergijaBool = false;
+            do
+            {
+                Console.Write("Product have alergija?: ");
+                string productIsalergija = Console.ReadLine();
+                if (productIsalergija == "yes" || productIsalergija == "true" || productIsalergija == "t")
+                {
+                    Alergija = true;
+                    alergijaBool = true;
+                }
+                else if (productIsalergija == "no" || productIsalergija == "false" || productIsalergija == "f")
+                {
+                    Alergija = false;
+                    alergijaBool = true;
+                }
+                else
+                {
+                    Console.WriteLine("try again!");
+                }
+
+            } while (alergijaBool != true);
+            Console.WriteLine("Product mervieniba: ");
+            Mervieniba = Console.ReadLine();
+        }
+
+        public void PrintProdcts()
+        {
+            PrintProduct();
+            SellPrice = 1.3 * prise;
+            Console.WriteLine($"Product shelf live is: {Shelflife.ToShortDateString()} ");
+            Console.WriteLine($"Product have alergija: {Alergija}");
+            Console.WriteLine($"Product have marvieniba: {Mervieniba}");
+            Console.WriteLine($"Product sell price is: {SellPrice}");
+            Console.WriteLine();
+        }
+    }
+}

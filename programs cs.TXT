@@ -1,0 +1,109 @@
+namespace _13_uzd
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int marketNumeric = 0;
+            bool EndWork = true;
+            string choose;
+            Market[] market = new Market[0];
+            do
+            {
+                Console.WriteLine("Choose ur step!");
+                Console.WriteLine("1 - Registration market");
+                Console.WriteLine("2 - Get market values");
+                Console.WriteLine("3 - Get market products");
+                Console.WriteLine("4 - Get arpus market products");
+                Console.WriteLine("5 - Get bistama market products");
+                Console.WriteLine("6 - End work!");
+                Console.WriteLine("ur step: ");
+                choose = Console.ReadLine();
+                switch (choose)
+                {
+                    case "1":
+                        Console.Clear();
+                        Market m1 = new Market();
+                        Array.Resize(ref market, market.Length + 1);
+                        m1.RegistrationMarket();
+                        market[marketNumeric] = m1;
+                        marketNumeric++;
+                        break;
+                    case "2":
+                        Console.Clear();
+                        if(marketNumeric == 0)
+                        {
+                            Console.WriteLine("Market list is empty!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Market list: ");
+                            for (int i = 0; i < marketNumeric; i++)
+                            {
+                                market[i].PrintNameOfMarket();
+                                market[i].TypeOfMarket();
+                            }
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        if (marketNumeric == 0)
+                        {
+                            Console.WriteLine("Market list is empty!");
+                            break;
+                        }
+                        Console.WriteLine("Choose market from list: ");
+                        for (int i = 0; i < marketNumeric; i++)
+                        {
+                            Console.Write($"{i + 1} - ");
+                            market[i].PrintNameOfMarket();
+                            Console.WriteLine();
+                        }
+                        int marketChoose;
+                        Console.WriteLine();
+                        Console.WriteLine("Ur choose: ");
+                        marketChoose = int.Parse(Console.ReadLine()) - 1;
+                        if (marketChoose < marketNumeric && marketChoose > marketNumeric)
+                        {
+                            Console.WriteLine("not found!");
+                            break;
+                        }
+                        for (int i = 0; i < marketNumeric; i++)
+                        {
+                            if(i == marketChoose)
+                            {
+                                Console.WriteLine();
+                                market[i].GetMarketProducts();
+                            }
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "4":
+                        Console.Clear();
+                        for (int i = 0; i < marketNumeric; i++)
+                        {
+                            market[i].GetArpus();
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "5":
+                        Console.Clear();
+                        for (int i = 0; i < marketNumeric; i++)
+                        {
+                            market[i].GetBistamsProdcts(); 
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "6":
+                        Console.Clear();
+                        EndWork = false;
+                        break;
+                    default:
+                        Console.WriteLine("not found this step!");
+                        break;
+                }
+            } while (EndWork != false);
+        }
+    }
+}

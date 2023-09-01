@@ -1,0 +1,14 @@
+namespace _13_uzd
+{
+    class Product
+    {
+        public string name;
+        protected double prise;
+
+        public void PrintProduct()
+        {
+            Console.WriteLine($"Name of product: {name}");
+            Console.WriteLine($"Price is: {prise}");
+        }
+    }
+}
